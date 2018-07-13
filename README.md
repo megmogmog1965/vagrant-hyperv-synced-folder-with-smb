@@ -1,10 +1,17 @@
 # vagrant-hyperv-synced-folder-with-smb
 
-CentOS7 Vagrant box cant mount smb synced folder without "mount_options" trick.
+This is for users using [Vagrant] with following situation.
+
+* Windows 10 host OS
+* CentOS6/7 guest OS.
+* Hyper-V is enabled (maybe for [Docker])
+* ``config.vm.synced_folder ..., type: "smb"``
+
+CentOS6/7 Vagrant box cant mount smb synced folder without "mount_options" trick.
 
 * [Synced Folders >> SMB >> Common Issues](https://www.vagrantup.com/docs/synced-folders/smb.html#common-issues)
 
-Replace "USERNAME" and "PASSWORD" with your SMB username and password.
+Replace "USERNAME" and "PASSWORD" with your Windows login username and password.
 
 ```
 Vagrant.configure("2") do |config|
@@ -13,8 +20,18 @@ Vagrant.configure("2") do |config|
 end
 ```
 
-Then run vagrant with hyperv.
+Then run vagrant with ``hyperv`` provider.
 
 ```
 vagrant up --provider=hyperv
 ```
+
+See also.
+
+* https://github.com/hashicorp/vagrant/issues/8703
+* https://github.com/hashicorp/vagrant/issues/8620
+* https://github.com/hashicorp/vagrant/pull/9170
+
+
+[Vagrant]:https://www.vagrantup.com/
+[Docker]:https://www.docker.com/
